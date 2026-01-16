@@ -1,0 +1,145 @@
+.hero {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+  padding-top: 5rem;
+  padding-bottom: 8rem;
+}
+
+.hero_container {
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.hero_title {
+  font-size: 3.75rem;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to bottom right, rgb(15, 23, 42), rgb(71, 85, 105));
+}
+
+.hero_description {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: rgb(100, 116, 139);
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.hero_form {
+  max-width: 28rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.hero_input-wrapper {
+  width: 100%;
+  text-align: left;
+}
+
+.hero_label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.hero_input {
+  width: 100%;
+  padding: 0.75rem 0;
+  font-size: 1.125rem;
+  border: 0;
+  border-bottom: 1px solid rgb(209, 213, 219);
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.hero_input::placeholder {
+  color: rgb(203, 213, 225);
+  font-weight: 300;
+}
+
+.hero_input:focus {
+  border-bottom-color: rgb(37, 99, 235);
+}
+
+.hero_button {
+  background-color: rgb(15, 23, 42);
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  min-width: 7.5rem;
+}
+
+.hero_button:hover {
+  background-color: rgb(37, 99, 235);
+}
+
+.hero_trust {
+  padding-top: 3rem;
+}
+
+.hero_trust-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgb(148, 163, 184);
+  text-transform: uppercase;
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+  .hero_form {
+    flex-direction: row;
+  }
+  
+  .hero_button {
+    width: auto;
+  }
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .hero_title {
+    font-size: 4.5rem;
+  }
+  
+  .hero_description {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero_title {
+    font-size: 6rem;
+  }
+}

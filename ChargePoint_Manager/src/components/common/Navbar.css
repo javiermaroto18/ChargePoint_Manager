@@ -1,0 +1,59 @@
+.navbar {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.navbar_logo {
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  font-size: 1.125rem;
+  color: rgb(15, 23, 42);
+}
+
+.navbar_menu {
+  display: none;
+  gap: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(100, 116, 139);
+}
+
+.navbar_menu a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.navbar_menu a:hover {
+  color: rgb(15, 23, 42);
+}
+
+.navbar_mobile-button {
+  display: block;
+  background: none;
+  border: none;
+  color: rgb(15, 23, 42);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.navbar_mobile-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Tablet y Desktop */
+@media (min-width: 768px) {
+  .navbar_menu {
+    display: flex;
+  }
+  
+  .navbar_mobile-button {
+    display: none;
+  }
+}
