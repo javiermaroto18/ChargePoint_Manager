@@ -76,7 +76,7 @@ function ECharge() {
     return (
       <div className="echarge_loading">
         <div className="echarge_spinner"></div>
-        <p>Cargando cargadores de Valencia...</p>
+        <p>Loading stations...</p>
       </div>
     );
   }
@@ -85,118 +85,135 @@ function ECharge() {
     <div className="echarge_app">
       {/* Header */}
       <header className="echarge_header">
-        <h1 className="echarge_title">
-          <span className="echarge_icon">⚡</span>
-          Cargadores Valencia
-        </h1>
+        <div className="echarge_header-top">
+          <span className="echarge_subtitle">Live network</span>
+          <div className="echarge_count">
+            {filteredChargers.length} stations
+          </div>
+        </div>
         <input
+          id="echarge_search"
+          name="search"
           className="echarge_search"
           type="text"
-          placeholder="Buscar por dirección o distrito..."
+          placeholder="Search by location or district..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <div className="echarge_count">
-          Total: <strong>{filteredChargers.length}</strong> cargadores
-        </div>
       </header>
 
-      {/* Contenedor principal */}
-      <div className="echarge_container">
-        {/* Mapa */}
-        <div className="echarge_map">
-          <MapContainer
-            center={[39.4699, -0.3763]}
-            zoom={13}
-            style={{ height: '100%', width: '100%' }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {filteredChargers.map((charger) => (
-              <Marker
-                key={charger.objectid}
-                position={[charger.geo_point_2d.lat, charger.geo_point_2d.lon]}
-                eventHandlers={{
-                  click: () => setSelectedCharger(charger),
-                }}
-              >
-                <Popup>
-                  <div>
-                    <strong>{charger.emplazamie}</strong>
-                    <p>Distrito: {charger.distrito}</p>
-                    <p>Tomas: {charger.toma}</p>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
+      {/* Contenedor principal con dos áreas de scroll independientes */}
+      <div className="echarge_main-container">
+        {/* Mapa con su propio scroll (aunque mapa no scroll, su contenedor sí) */}
+        <div className="echarge_map-wrapper">
+          <div className="echarge_map">
+            <MapContainer
+              center={[39.4699, -0.3763]}
+              zoom={13}
+              style={{ height: '100%', width: '100%' }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {filteredChargers.map((charger) => (
+                <Marker
+                  key={charger.objectid}
+                  position={[charger.geo_point_2d.lat, charger.geo_point_2d.lon]}
+                  eventHandlers={{
+                    click: () => setSelectedCharger(charger),
+                  }}
+                >
+                  <Popup>
+                    <div>
+                      <strong>{charger.emplazamie}</strong>
+                      <p>District: {charger.distrito}</p>
+                      <p>Outlets: {charger.toma}</p>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
+          </div>
         </div>
 
-        {/* Lista lateral */}
-        <aside className="echarge_sidebar">
-          <div className="echarge_list">
-            {filteredChargers.map((charger) => (
-              <div
-                key={charger.objectid}
-                className={`echarge_card ${selectedCharger?.objectid === charger.objectid ? 'echarge_card--active' : ''}`}
-                onClick={() => setSelectedCharger(charger)}
-              >
-                <div className="echarge_card-header">
-                  <span className="echarge_badge">Nº {charger.no}</span>
-                  <span className="echarge_district">Distrito {charger.distrito}</span>
-                </div>
-                <h3 className="echarge_card-title">{charger.emplazamie}</h3>
-                <div className="echarge_card-info">
-                  <span>🔌 {charger.toma} toma{charger.toma > 1 ? 's' : ''}</span>
-                  <span>💰 {charger.precio_iv}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </aside>
-      </div>
-
-      {/* Detalles del cargador seleccionado */}
-      {selectedCharger && (
-        <div className="echarge_details">
-          <div className="echarge_details-content">
-            <h2>{selectedCharger.emplazamie}</h2>
-            <div className="echarge_details-grid">
-              <div className="echarge_detail-item">
-                <span className="echarge_detail-label">Distrito</span>
-                <span className="echarge_detail-value">{selectedCharger.distrito}</span>
-              </div>
-              <div className="echarge_detail-item">
-                <span className="echarge_detail-label">Tomas</span>
-                <span className="echarge_detail-value">{selectedCharger.toma}</span>
-              </div>
-              <div className="echarge_detail-item">
-                <span className="echarge_detail-label">Precio</span>
-                <span className="echarge_detail-value">{selectedCharger.precio_iv}</span>
-              </div>
-              <div className="echarge_detail-item">
-                <span className="echarge_detail-label">Potencia</span>
-                <span className="echarge_detail-value">{selectedCharger.potenc_ia}</span>
-              </div>
-              <div className="echarge_detail-item">
-                <span className="echarge_detail-label">Conector</span>
-                <span className="echarge_detail-value">{selectedCharger.conector}</span>
-              </div>
-              <div className="echarge_detail-item">
-                <span className="echarge_detail-label">Tipo de carga</span>
-                <span className="echarge_detail-value">{selectedCharger.tipo_carga}</span>
-              </div>
+        {/* Contenedor derecho con sidebar y detalles, cada uno con su scroll */}
+        <div className="echarge_right-panel">
+          {/* Lista lateral - scroll independiente */}
+          <aside className="echarge_sidebar">
+            <div className="echarge_sidebar-header">
+              <h2>Stations</h2>
             </div>
-            {selectedCharger.observacio && (
-              <div className="echarge_observation">
-                <strong>Observaciones:</strong> {selectedCharger.observacio}
+            <div className="echarge_list">
+              {filteredChargers.length > 0 ? (
+                filteredChargers.map((charger) => (
+                  <div
+                    key={charger.objectid}
+                    className={`echarge_card ${selectedCharger?.objectid === charger.objectid ? 'echarge_card--active' : ''}`}
+                    onClick={() => setSelectedCharger(charger)}
+                  >
+                    <div className="echarge_card-number">{charger.no}</div>
+                    <div className="echarge_card-content">
+                      <h3 className="echarge_card-title">{charger.emplazamie}</h3>
+                      <div className="echarge_card-meta">
+                        <span className="echarge_meta-item">District {charger.distrito}</span>
+                        <span className="echarge_meta-separator">•</span>
+                        <span className="echarge_meta-item">{charger.toma} outlet{charger.toma > 1 ? 's' : ''}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="echarge_empty-state">No stations found</div>
+              )}
+            </div>
+          </aside>
+
+          {/* Detalles del cargador - scroll independiente */}
+          <section className="echarge_details">
+            {selectedCharger ? (
+              <div className="echarge_details-content">
+                <h2 className="echarge_details-title">{selectedCharger.emplazamie}</h2>
+                <div className="echarge_details-grid">
+                  <div className="echarge_detail-item">
+                    <span className="echarge_detail-label">District</span>
+                    <span className="echarge_detail-value">{selectedCharger.distrito}</span>
+                  </div>
+                  <div className="echarge_detail-item">
+                    <span className="echarge_detail-label">Outlets</span>
+                    <span className="echarge_detail-value">{selectedCharger.toma}</span>
+                  </div>
+                  <div className="echarge_detail-item">
+                    <span className="echarge_detail-label">Price</span>
+                    <span className="echarge_detail-value">{selectedCharger.precio_iv}</span>
+                  </div>
+                  <div className="echarge_detail-item">
+                    <span className="echarge_detail-label">Power</span>
+                    <span className="echarge_detail-value">{selectedCharger.potenc_ia}</span>
+                  </div>
+                  <div className="echarge_detail-item">
+                    <span className="echarge_detail-label">Connector</span>
+                    <span className="echarge_detail-value">{selectedCharger.conector}</span>
+                  </div>
+                  <div className="echarge_detail-item">
+                    <span className="echarge_detail-label">Charge Type</span>
+                    <span className="echarge_detail-value">{selectedCharger.tipo_carga}</span>
+                  </div>
+                </div>
+                {selectedCharger.observacio && (
+                  <div className="echarge_observation">
+                    <p>{selectedCharger.observacio}</p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="echarge_empty-details">
+                <p>Select a station to view details</p>
               </div>
             )}
-          </div>
+          </section>
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -4,13 +4,13 @@ import './Navbar.css';
 export default function Navbar() {
   return (
     <header className="navbar">
-      <div className="navbar_logo">EV/M</div>
+      <div className="navbar_logo">ChargePoint Manager</div>
       
       <nav className="navbar_menu">
-        <a href="#">Platform</a>
-        <a href="#">Solutions</a>
-        <a href="#">Pricing</a>
-        <a href="#">Contact</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Stations</a>
+        <a href="#">Analytics</a>
+        <a href="#">Support</a>
       </nav>
       
       <button className="navbar_mobile-button">
