@@ -1,5 +1,6 @@
 import type { Charger } from '../../types';
 
+
 interface Props {
   chargers: Charger[];
   selectedId?: number;

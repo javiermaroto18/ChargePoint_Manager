@@ -1,6 +1,7 @@
 import type { Charger } from '../../types';
 import { MapPin, Zap, Info, BatteryCharging, Navigation, CheckCircle2, X } from 'lucide-react';
 
+
 interface Props {
   charger: Charger | null;
   onClose?: () => void;
