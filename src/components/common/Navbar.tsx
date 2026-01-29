@@ -10,9 +10,9 @@ export default function Navbar() {
       </Link>
       
       <nav className="navbar_menu">
-        <Link to="/stations">Stations</Link>
+        <Link to="/stations">Estaciones</Link>
         <Link to="/reservations">Mis Reservas</Link>
-        <Link to="/support">Support</Link>
+        <Link to="/support">Soporte</Link>
       </nav>
       
       <button className="navbar_mobile-button">
