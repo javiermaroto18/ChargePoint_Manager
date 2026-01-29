@@ -5,18 +5,18 @@ export default function Features() {
   const features = [
     {
       icon: <Zap strokeWidth={1.5} className="features_icon" />,
-      title: "Real-time Optimization",
-      description: "Dynamic load balancing ensures maximum efficiency across your entire charging network without overloading the grid."
+      title: "Reservas en Tiempo Real",
+      description: "Consulta la disponibilidad de los puntos de carga y reserva tu plaza al instante. Sin esperas, sin complicaciones."
     },
     {
       icon: <TrendingUp strokeWidth={1.5} className="features_icon" />,
-      title: "Predictive Analytics",
-      description: "Advanced algorithms forecast usage patterns, helping you scale infrastructure precisely where and when it's needed."
+      title: "Control de Gastos",
+      description: "Visualiza tus estadísticas de consumo por semana, mes y año. Mantén un registro completo de todas tus cargas."
     },
     {
       icon: <LayoutDashboard strokeWidth={1.5} className="features_icon" />,
-      title: "Unified Dashboard",
-      description: "Control every aspect of your fleet and station operations from a single, beautifully designed interface."
+      title: "Gestión Centralizada",
+      description: "Accede a toda la red de cargadores de Valencia desde una única interfaz intuitiva y fácil de usar."
     }
   ];
 
