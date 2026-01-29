@@ -1,4 +1,4 @@
-import type { Charger } from '../../types';
+import type { Charger } from '../../services/types';
 
 
 interface Props {

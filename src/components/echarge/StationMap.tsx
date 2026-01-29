@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
-import type { Charger } from '../../types';
+import type { Charger } from '../../services/types';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';

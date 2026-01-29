@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { Charger } from '../../types';
+import type { Charger } from '../../services/types';
 import { StationMap } from './StationMap';
 import { StationsList } from './StationsList';
 import { StationDetails } from './StationDetails';
